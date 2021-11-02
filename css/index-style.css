@@ -1,0 +1,21 @@
+#video-player{
+    position: relative;
+    margin: 0 auto;
+    margin-top: 150px;
+	overflow: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center; 
+    align-items: center;
+}
+
+#toggle-play{
+    position: absolute;
+    height: 50px;
+    width: 50px;
+}
+
+#toggle-play:hover{
+    background-color: blue;
+}

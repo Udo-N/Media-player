@@ -1,5 +1,6 @@
 function load(url){
-
+    console.log(url);
+    video.innerHTML += "<source src='"+ url + "'>";
 }
 
 function createPlayer (divId, width, height){
@@ -7,7 +8,6 @@ function createPlayer (divId, width, height){
 
     text = "<video controls id='video' preload='metadata'";
     text += " width='"+ width +"' height='"+ height +"'>";
-    text += "<source src='media/Bamboozle 7.mp4' type='video/mp4'>";
     text +=  "Sorry, your browser doesn't support embedded videos.</video>";
     // text += "<button id = 'toggle-play'></button>";
     div.innerHTML = text;
@@ -76,12 +76,13 @@ function getDuration(){
 
 function setFullscreen(fullscreen){
     if (fullscreen){
-        video.requestFullscreen();
+        video.webkitRequestFullScreen();
     }
     else{
         video.fullscreen = false;
     }
 }
+
 
 function getPlaybackState(){
     var duration = video.duration;
@@ -94,6 +95,7 @@ function getPlaybackState(){
     else if (video.paused && video.currentTime == duration){
         return "Ended"
     }
+
 }
 
 function getViewability(){
@@ -103,9 +105,10 @@ function getViewability(){
 createPlayer("video-player", 500, 300);
 const video = document.getElementById('video');
 const videoControls = document.getElementById('video-controls');
+load("https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4");
 // setFullscreen(true);
 // console.log(video.duration);
-setInterval(function(){console.log(getPlaybackState());}, 2000);
+// setInterval(function(){console.log(getPlaybackState());}, 2000);
 // setInterval(function(){console.log(video.currentTime);}, 2000);
 
 

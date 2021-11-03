@@ -50,19 +50,24 @@ function setMute(mute){
     }
 }
 
+function getMute(){
+    if (video.muted){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 function getDuration(){
     return Math.round(video.duration);
 }
 
 function setFullscreen(fullscreen){
     if (fullscreen){
-        video.webkitRequestFullScreen();
-    }
-    else{
-        video.fullscreen = false;
+        video.requestFullscreen();
     }
 }
-
 
 function getPlaybackState(){
     var duration = video.duration;
@@ -78,8 +83,7 @@ function getPlaybackState(){
 
 }
 
-
-function getPercentOfView() {
+function getViewability() {
     videoWidth = getWidth();
     videoHeight = getHeight();
     windowHeight = window.innerHeight;
@@ -130,55 +134,8 @@ function getPercentOfView() {
     visibleArea = visibleWidth * visibleHeight;
     visiblePercent = (visibleArea/videoArea) * 100;
 
-    // console.log(visibleHeight);
-    // console.log(visibleWidth);
-
-    return Math.round(visiblePercent)
-    
+    return Math.round(visiblePercent);    
 }
-
-
-// function getViewability(){
-//     videoWidth = getWidth();
-//     videoHeight = getHeight();
-//     windowHeight = window.innerHeight;
-//     windowWidth = window.innerWidth;
-//     scrollY = window.scrollY;
-//     scrollX = window.scrollX;
-//     marginTop = parseInt(getComputedStyle(document.getElementById("video-player")).marginTop);
-//     videoArea = videoWidth * videoHeight;
-
-//     if (scrollY <= marginTop){
-//         visibleHeight = windowHeight - marginTop + scrollY;
-//     }
-//     else if (scrollY > marginTop){
-//         visibleHeight = videoHeight + marginTop - scrollY;
-//     }
-
-//     if (visibleHeight > windowHeight){
-//         visibleHeight = windowHeight;
-//     }
-//     else if (visibleHeight > videoHeight){
-//         visibleHeight = videoHeight;
-//     }
-//     else if (visibleHeight < 0){
-//         return 0;
-//     }
-
-//     if (windowWidth < videoWidth){
-//         visibleWidth = windowWidth;
-//     }
-//     else{
-//         visibleWidth = videoWidth;
-//     }
-
-//     visibleArea = visibleHeight * visibleWidth;
-    
-//     console.log(visibleArea);
-//     console.log(videoArea);
-
-//     return Math.round((visibleArea / videoArea) * 100);
-// }
 
 function createPlayer (divId, width, height){
     div = document.getElementById(divId);
@@ -186,41 +143,56 @@ function createPlayer (divId, width, height){
     text = "<video controls id='video' preload='metadata'";
     text += " width='"+ width +"' height='"+ height +"'>";
     text +=  "Sorry, your browser doesn't support embedded videos.</video>";
-    // text += "<button id = 'toggle-play'></button>";
     div.innerHTML = text;
-
-    // const video = document.getElementById('video');
-    // const videoControls = document.getElementById('video-controls');
-    
-    // const videoWorks = !!document.createElement('video').canPlayType;
-    // if(videoWorks) {
-    //     video.controls = false;
-    //     videoControls.classList.remove('hidden');
-    // }
 }
+
+
 
 createPlayer("video-player", 1000, 800);
 const video = document.getElementById('video');
-const videoControls = document.getElementById('video-controls');
 load("https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4");
 
-// console.log(video.getBoundingClientRect());
-// console.log(parseInt(getComputedStyle(document.getElementById("video-player")).marginTop));
-// setFullscreen(true);
-setInterval(function(){console.log(getPercentOfView()) + "%"}, 1500);
-// getPercentOfView()
 
 
 
-// document.addEventListener("DOMContentLoaded", () => {
-//     const togglePlay = document.querySelector("#toggle-play");
+// Test Cases for each API feature(Uncomment line to test)
 
-//     togglePlay.addEventListener("click", () => {
-//         console.log(getWidth());
-//         if (video.paused || video.ended) {
-//             play();
-//         }else {
-//             pause();
-//         }
-//     });
-// });
+//play(): Should play every 1.5 seconds
+// setInterval(function(){play();}, 1500);
+
+//pause(): Should pause every 1.5 seconds
+// setInterval(function(){pause();}, 1500);
+
+// resize(width, height):
+// resize(300, 200)
+
+// getHeight():
+// console.log(getHeight())
+
+// getWidth():
+// console.log(getWidth())
+
+// setAutoplay(autoplay):
+// setAutoplay(true)
+
+// setVolume(volume)
+// setVolume(10)
+
+// setMute(mute)
+// setMute(true)
+
+// getMute()
+/* setMute(true)
+ console.log(getMute()) */
+
+// getDuration(): If executed before video loads in, NaN is returned
+// var delay = setInterval(function(){console.log(getDuration()); clearInterval(delay)}, 100);
+
+// setFullscreen()
+// setFullscreen(true)
+
+// getPlaybackState(): Logs playback state every 2 seconds
+// setInterval(function(){console.log(getPlaybackState())}, 2000);
+
+// getViewability()
+// console.log(getViewability())
